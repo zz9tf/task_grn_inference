@@ -16,18 +16,11 @@ method="scprint"
 source "src/utils/parse_args.sh"
 parse_arguments "$@"
 
-# Set up a writable lamindb home using the pre-built instance from the container
-_lamin_home=$(mktemp -d /tmp/lamin_home_XXXXXX)
+# Set up lamindb instance locally (bionty module required by scprint)
 _lamin_storage=$(mktemp -d /tmp/lamin_storage_XXXXXX)
+/home/zz/miniconda3/envs/genernbi/bin/lamin init --storage ${_lamin_storage} --modules bionty 2>/dev/null || true
 
-singularity exec resources/singularity/${method} cp -r /root/.lamin/. ${_lamin_home}/.lamin/
-singularity exec resources/singularity/${method} cp /workspace/main/63c3fd677cf055009fc56bed97323c1c.lndb ${_lamin_storage}/
+/home/zz/miniconda3/envs/genernbi/bin/python src/methods/${method}/script.py \
+    --rna $rna --prediction $prediction --tf_all ${tf_all:-resources/grn_benchmark/prior/tf_all.csv}
 
-for f in ${_lamin_home}/.lamin/*.env; do
-    sed -i "s|lamindb_instance_storage_root=/workspace/main|lamindb_instance_storage_root=${_lamin_storage}|g" "$f"
-done
-
-singularity exec --home ${_lamin_home} --bind $(pwd):$(pwd) resources/singularity/${method} \
-    python src/methods/${method}/script.py --rna $rna --prediction $prediction --tf_all ${tf_all:-resources/grn_benchmark/prior/tf_all.csv}
-
-rm -rf ${_lamin_home} ${_lamin_storage}
+rm -rf ${_lamin_storage}

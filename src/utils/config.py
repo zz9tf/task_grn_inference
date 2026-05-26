@@ -217,7 +217,7 @@ DATASETS = list(DATASET_GROUPS.keys())
 DATASETS_CELLTYPES = {
     "replogle": "K562",
     "norman": "K562",
-    # "adamson": "K562",
+    "adamson": "K562",
     "xaira_HEK293T": "HEK293T",
     "xaira_HCT116": "HCT116",
     "op": "PBMC",
@@ -233,7 +233,7 @@ DATASETS_CELLTYPES = {
 
 DATASETS_METRICS = {
     'replogle': ['regression', 'ws_distance', 'tf_recovery', 'tf_binding', 'sem', 'gs_recovery', 'vc'],
-    # 'adamson': ['regression',  'tf_binding', 'sem', 'gs_recovery'],
+    'adamson': ['regression', 'tf_binding', 'sem', 'gs_recovery'],
     'norman': ['regression', 'ws_distance', 'tf_binding', 'gs_recovery', 'vc', 'tf_recovery'],
     'nakatake': ['regression', 'gs_recovery', 'vc'],  # sem removed: only 5 control samples, scores below threshold
     'op': ['regression', 'vc', 'replicate_consistency', 'tf_binding', 'sem',  'gs_recovery'],

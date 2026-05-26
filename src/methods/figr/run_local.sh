@@ -27,4 +27,5 @@ if [ ! -z "$layer" ]; then
     r_args="$r_args --layer $layer"
 fi
 
-singularity run resources/singularity/${method} Rscript src/methods/${method}/script.R $r_args
+export RETICULATE_PYTHON=/home/zz/miniconda3/envs/genernbi/bin/python
+/home/zz/miniconda3/envs/grn_r/bin/Rscript src/methods/${method}/script.R $r_args

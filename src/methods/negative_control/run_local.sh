@@ -26,4 +26,4 @@ fi
 
 echo $python_args
 
-conda run -n genernbi python src/methods/${method}/script.py $python_args
+/home/zz/miniconda3/envs/genernbi/bin/python src/methods/${method}/script.py $python_args
