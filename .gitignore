@@ -1,11 +1,37 @@
 # mac os x
 .DS_Store
 
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.so
 
+# large data files
+*.h5
+*.h5ad
+*.loom
+*.pkl
+*.pt
+*.pth
+*.npz
+*.npy
+*.parquet
+*.feather
+*.zarr
 
 # related to files
 .pybiomart.sqlite
 logs/
+*.log
 params*
 resources*
 output/
@@ -19,7 +45,6 @@ temp/
 tw*
 genernbi.egg*
 .ipynb_checkpoints
-__pycache__/
 
 .$*
 bin*
